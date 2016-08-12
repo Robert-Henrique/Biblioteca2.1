@@ -1,0 +1,54 @@
+﻿
+<div ng-controller="listaClienteController" ng-init="obterClientes()">
+    <h2>Clientes</h2>
+    <div class="form-group">
+        <label>Filtrar</label>
+        <input type="text" ng-model="filtro" ng-change="pesquisaAlterada()" class="form-control" placeholder="Digite para filtrar...">
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data de Nascimento</th>
+                    <th>Sexo</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Cidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cliente in clientes">
+                    <td>{{cliente.Id}}</td>
+                    <td>{{cliente.Nome}}</td>
+                    <td>{{cliente.CPF}}</td>
+                    <td><span>{{cliente.DataNascimento | date:"dd/MM/yyyy"}}</span></td>
+                    <td>{{cliente.Sexo}}</td>
+                    <td>{{cliente.Telefone}}</td>
+                    <td>{{cliente.Email}}</td>
+                    <td>{{cliente.Cidade.Nome}}</td>
+                    <td>
+                        <a href="#/cliente/detalhes/{{cliente.Id}}" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+
+                        <button ng-click="excluir(cliente)" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h5>Página {{currentPage}} de {{numPages}}</h5>
+        <uib-pagination total-items="totalItens" ng-model="currentPage" ng-change="paginaAlterada()" max-size="maxSize" class="pagination-sm" boundary-links="true"></uib-pagination>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Biblioteca</title>
+    <meta charset="utf-8" />
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+
+    <script src="scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+
+    <link href="Content/validationEngine.jquery.css" rel="stylesheet" />
+    <script src="scripts/jquery.maskedinput.min.js"></script>
+    <script src="scripts/jquery.validationEngine.js"></script>
+    <script src="scripts/jquery.validationEngine-pt_BR.js"></script>
+    <script src="scripts/moment-with-locales.min.js"></script>
+    <script src="scripts/moment.min.js"></script>
+
+    <script src="app/Modulo.js"></script>
+    <script src="app/directives/mask.js"></script>
+    <script src="app/services/cliente-service.js"></script>
+    <script src="app/controllers/cliente/lista-controller.js"></script>
+    <script src="app/controllers/Cliente/detalhes-controller.js"></script>
+    <script src="app/services/estado-service.js"></script>
+    <script src="app/services/cidade-service.js"></script>
+    <script src="app/services/login-service.js"></script>
+</head>
+<body>
+    <form id="form">
+        <div class="container body-content">
+            <div ng-view></div>
+        </div>
+    </form>
+</body>
+</html>
