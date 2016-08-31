@@ -1,7 +1,7 @@
 ﻿app.service("clienteService", function ($http) {
 
-    this.getClientes = function (range, filtro) {
-        return $http.get("/api/cliente/GetCliente");
+    this.getClientes = function (range, totalItens, filtro) {
+        return $http.get("/api/Cliente/GetCliente/" + range + "/" + totalItens + "/" + filtro);
     };
 
     this.getCliente = function (Id) {

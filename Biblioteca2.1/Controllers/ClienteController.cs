@@ -24,10 +24,29 @@ namespace Biblioteca2._1.Controllers
             clienteRepository = _clienteRepository;
         }
 
-        // GET: api/Clientes
-        public IQueryable<Cliente> GetCliente()
+        public IHttpActionResult GetCliente(int range, int totalItens, string filtro = "")
         {
-            return clienteRepository.GetAll();
+            range = (range - 1) * totalItens;
+            var clientes = clienteRepository.GetAll().OrderBy(l => l.Id).Skip(range).Take(10).ToList();
+
+            clientes = clientes.Where(l => string.IsNullOrEmpty(filtro) || l.Nome.Contains(filtro)
+                                                                        || l.CPF.Contains(filtro)
+                                                                        || l.DataNascimento.ToShortDateString().Contains(filtro)
+                                                                        || l.Sexo.Contains(filtro)
+                                                                        || l.Telefone.Contains(filtro)
+                                                                        || l.Email.Contains(filtro)
+                                                                        || l.Cidade.Nome.Contains(filtro)).ToList();
+            int total = clienteRepository.GetAll().Count();
+            decimal numeroPaginas = Math.Ceiling(Convert.ToDecimal(total) / totalItens);
+
+            var result = new
+            {
+                totalItens = total,
+                numPages = numeroPaginas,
+                Clientes = clientes
+            };
+
+            return Ok(result);
         }
 
         // GET: api/Clientes/5

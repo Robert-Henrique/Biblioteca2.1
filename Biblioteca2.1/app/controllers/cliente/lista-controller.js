@@ -6,10 +6,10 @@
     $scope.clientes = [];
 
     $scope.obterClientes = function () {
-        clienteService.getClientes($scope.currentPage, $scope.filtro).success(function (data) {
-            $scope.clientes = data;
-           // $scope.totalItens = data.totalItens;
-           // $scope.numPages = data.numPages;
+        clienteService.getClientes($scope.currentPage, $scope.maxSize, $scope.filtro).success(function (data) {
+            $scope.clientes = data.Clientes;
+            $scope.totalItens = data.totalItens;
+            $scope.numPages = data.numPages;
         }).error(function (erro) {
             console.log(erro);
         });
