@@ -15,6 +15,12 @@ namespace Biblioteca2._1
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "Cliente",
                 routeTemplate: "api/{controller}/{action}/{range}/{totalItens}/{filtro}",
                 defaults: new
@@ -25,12 +31,6 @@ namespace Biblioteca2._1
                     totalItens = RouteParameter.Optional,
                     filtro = RouteParameter.Optional
                 }
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
             );
         }
     }

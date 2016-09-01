@@ -26,17 +26,24 @@ namespace Biblioteca2._1.Controllers
 
         public IHttpActionResult GetCliente(int range, int totalItens, string filtro = "")
         {
+            List<Cliente> clientes = new List<Cliente>();
+            int total = 0;
             range = (range - 1) * totalItens;
-            var clientes = clienteRepository.GetAll().OrderBy(l => l.Id).Skip(range).Take(10).ToList();
 
-            clientes = clientes.Where(l => string.IsNullOrEmpty(filtro) || l.Nome.Contains(filtro)
-                                                                        || l.CPF.Contains(filtro)
-                                                                        || l.DataNascimento.ToShortDateString().Contains(filtro)
-                                                                        || l.Sexo.Contains(filtro)
-                                                                        || l.Telefone.Contains(filtro)
-                                                                        || l.Email.Contains(filtro)
-                                                                        || l.Cidade.Nome.Contains(filtro)).ToList();
-            int total = clienteRepository.GetAll().Count();
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                var resultCliente = clienteRepository.GetAll().Where(l => string.IsNullOrEmpty(filtro) ||
+                l.Nome.Contains(filtro) ||
+                l.CPF.Contains(filtro));
+                total = resultCliente.Count();
+                clientes = resultCliente.OrderBy(l => l.Nome).Skip(range).Take(totalItens).ToList();
+            }
+            else
+            {
+                clientes = clienteRepository.GetAll().OrderBy(l => l.Nome).Skip(range).Take(totalItens).ToList();
+                total = clienteRepository.GetAll().Count();
+            }
+
             decimal numeroPaginas = Math.Ceiling(Convert.ToDecimal(total) / totalItens);
 
             var result = new

@@ -24,6 +24,10 @@
     };
 
     $scope.pesquisaAlterada = function () {
-        $scope.obterClientes();
+
+        if ($scope.filtro.length == 0 || $scope.filtro.length >= 3) {
+            $scope.currentPage = 1;
+            $scope.obterClientes();
+        }
     };
 });
