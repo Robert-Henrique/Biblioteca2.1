@@ -4,11 +4,11 @@ app.config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
    .when("/",
-        { templateUrl: 'app/templates/cliente/index.html' })
-   .when("/cliente/detalhes",
-        { templateUrl: 'app/templates/cliente/detalhes.html' })
-   .when("/cliente/detalhes/:id",
-        { templateUrl: 'app/templates/cliente/Detalhes.html' })
+        { templateUrl: 'views/cliente/index.html' })
+   .when("/cliente/form",
+        { templateUrl: 'views/cliente/form.html' })
+   .when("/cliente/form/:id",
+        { templateUrl: 'views/cliente/form.html' })
    .otherwise(
         { redirectTo: "/" });
 });
